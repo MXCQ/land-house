@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// 引入antd-mobile样式文件
+// 按需加载后可以删除该引用
+// import 'antd-mobile/dist/antd-mobile.css';
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
