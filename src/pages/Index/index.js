@@ -1,9 +1,12 @@
 import React, { PureComponent } from "react";
 
-import { Carousel } from "antd-mobile";
+import { Carousel, Flex } from "antd-mobile";
 
 import instance, { BASE_URL } from "../../utils/axios";
 import { getSwiper, getGroup, getNews } from "../../utils/api/home";
+
+import "./index.css";
+import Navs from "../../utils/homeNav";
 
 class Index extends PureComponent {
   state = {
@@ -80,6 +83,18 @@ class Index extends PureComponent {
     ));
   };
 
+  // 渲染导航栏
+  renderFlex = () => {
+    return Navs.map((item) => (
+      <Flex.Item key={item.id} onClick={() => {
+        this.props.history.push(item.path)
+      }}>
+        <img src={item.img} />
+        <p>{item.title}</p>
+      </Flex.Item>
+    ));
+  };
+
   render() {
     return (
       <div>
@@ -87,6 +102,11 @@ class Index extends PureComponent {
         <Carousel autoplay={this.state.aplay} infinite>
           {this.renderCarousel()}
         </Carousel>
+
+        {/* 导航栏 */}
+        <Flex className="nav">
+          {this.renderFlex()}
+        </Flex>
       </div>
     );
   }

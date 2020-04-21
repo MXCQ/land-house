@@ -1,38 +1,46 @@
-import React, { PureComponent } from 'react';
-import { Link, Route } from 'react-router-dom'
-import './index.css'
+import React, { PureComponent } from "react";
+import { Link, Route } from "react-router-dom";
+import "./index.css";
 
-import { TabBar } from 'antd-mobile'
-import tabBars from '../../utils/tabbarConfig';
+import { TabBar } from "antd-mobile";
+import tabBars from "../../utils/tabbarConfig";
 
-import Index from '../Index'
-import House from '../House'
-import Profile from '../Profile'
+import Index from "../Index";
+import House from "../House";
+import Profile from "../Profile";
 
 class Home extends PureComponent {
-
   state = {
     selectedTab: this.props.location.pathname,
   };
 
+  componentDidMount() {
+    this.props.history.listen((location) => {
+      console.log(location);
+      
+      this.setState({
+        selectedTab: location.pathname
+      })
+    })
+  }
+
   // tab栏组件
   renderTabBarItems = () => {
-    return tabBars.map((item) => <TabBar.Item
-      title={item.title}
-      key={item.path}
-      icon={
-        <i className={'iconfont ' + item.icon} />
-      }
-      selectedIcon={<i className={'iconfont ' + item.icon} />
-      }
-      selected={this.state.selectedTab === item.path}
-      onPress={() => {
-        this.props.history.push(item.path)
-        this.setState({
-          selectedTab: item.path
-        })
-      }}
-    />)
+    return tabBars.map((item) => (
+      <TabBar.Item
+        title={item.title}
+        key={item.path}
+        icon={<i className={"iconfont " + item.icon} />}
+        selectedIcon={<i className={"iconfont " + item.icon} />}
+        selected={this.state.selectedTab === item.path}
+        onPress={() => {
+          this.props.history.push(item.path);
+          // this.setState({
+          //   selectedTab: item.path,
+          // });
+        }}
+      />
+    ));
   };
   render() {
     return (
@@ -53,7 +61,7 @@ class Home extends PureComponent {
           >
             {this.renderTabBarItems()}
           </TabBar>
-        </div >
+        </div>
       </div>
     );
   }
