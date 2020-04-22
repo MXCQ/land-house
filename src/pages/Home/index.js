@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { Link, Route } from "react-router-dom";
-import "./index.css";
+import "./index.scss";
 
 import { TabBar } from "antd-mobile";
 import tabBars from "../../utils/tabbarConfig";
@@ -17,11 +17,12 @@ class Home extends PureComponent {
   componentDidMount() {
     this.props.history.listen((location) => {
       console.log(location);
-      
-      this.setState({
-        selectedTab: location.pathname
-      })
-    })
+      if (location.pathname !== this.state.selectedTab) {
+        this.setState({
+          selectedTab: location.pathname,
+        });
+      }
+    });
   }
 
   // tab栏组件
