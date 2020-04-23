@@ -30,18 +30,37 @@ class Index extends PureComponent {
 
   // 获取当前城市信息
   getCurrCity = () => {
-    // 使用百度地图LocalCity类获取当前城市名字
-    const myCity = new window.BMap.LocalCity();
+    // // 使用百度地图LocalCity类获取当前城市名字
+    // const myCity = new window.BMap.LocalCity();
+    // myCity.get(async (result) => {
+    //   // 根据百度地图获取到城市名字，调用后台接口获取当前城市的详细数据
+    //   let res = await getCityInfo(result.name);
+    //   console.log(res);
+    //   // 显示到页面上
+    //   res.status === 200 &&
+    //     this.setState({
+    //       currCity: res.data,
+    //     });
+    // });
+
+    let map = new window.BMap.Map("allmap");
+    function myFun(result) {
+      let cityName = result.name;
+      map.setCenter(cityName);
+      console.log("当前定位城市:" + cityName);
+    }
+    // 调用IP定位当前测试的雷LocalCIty（构造函数）
+    let myCity = new window.BMap.LocalCity();
     myCity.get(async (result) => {
-      // 根据百度地图获取到城市名字，调用后台接口获取当前城市的详细数据
-      let res = await getCityInfo(result.name);
-      console.log(res);
-      // 显示到页面上
-      res.status === 200 &&
-        this.setState({
-          currCity: res.data,
-        });
+      let cityName = result.name;
+      console.log(cityName);
+      // 调用接口获取城市详细数据
+      const res = await getCityInfo(cityName)
+      res.status === 200 && this.setState({
+        currCity: res.data
+      })
     });
+  
   };
 
   // 获取初始化数据
