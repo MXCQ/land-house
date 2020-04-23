@@ -2,7 +2,7 @@ import axios from "axios";
 import { Toast } from "antd-mobile";
 
 // 后台接口的基础地址
-const BASE_URL = "http://api-haoke-dev.itheima.net";
+const BASE_URL = "https://api-haoke-web.itheima.net";
 // 创建axios的实例(单例模式)
 const instance = axios.create({
   baseURL: BASE_URL,
