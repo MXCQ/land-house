@@ -3,6 +3,16 @@
  */
 import { getCityInfo } from "./api/city";
 
+export const getLocal = (key) => {
+  return window.localStorage.getItem(key)
+}
+export const setLocal = (key, val) => {
+  window.localStorage.setItem(key, val)
+}
+export const removeLocal = (key) => {
+  window.localStorage.removeItem(key)
+}
+
 const getCityName = async () => {
   return new Promise((resolve, reject) => {
     let myCity = new window.BMap.LocalCity();
@@ -13,7 +23,7 @@ const getCityName = async () => {
 };
 
 // 城市信息数据
-const CURRY_CITY = "curry_city";
+export const CURRY_CITY = "curry_city";
 export const getCurryCity = () => {
   let curCity = localStorage.getItem(CURRY_CITY);
   if (!curCity) {

@@ -16,7 +16,7 @@ class Home extends PureComponent {
 
   componentDidMount() {
     this.props.history.listen((location) => {
-      console.log(location);
+      // console.log(location);
       if (location.pathname !== this.state.selectedTab) {
         this.setState({
           selectedTab: location.pathname,

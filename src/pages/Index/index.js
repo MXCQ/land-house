@@ -51,10 +51,10 @@ class Index extends PureComponent {
     //     });
     // });
     const res =await getCurryCity();
-    console.log(res);
+    // console.log(res);
     if (res) {
       this.setState({
-        currCity:  JSON.parse(res),
+        currCity: JSON.parse(res),
       });
     }
   };

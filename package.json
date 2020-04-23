@@ -1,6 +1,5 @@
 {
   "name": "land-house-zmx",
-  "homepage": "https://MXCQ.github.io/land-house/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,7 +16,8 @@
     "react-app-rewired": "^2.1.5",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-virtualized": "^9.21.2"
   },
   "scripts": {
     "start": "react-app-rewired start",
