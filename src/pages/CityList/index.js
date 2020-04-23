@@ -56,12 +56,6 @@ class CityList extends PureComponent {
       cityIndex,
       cityList,
     };
-
-    // this.setState({
-    //   cityIndex,
-    //   cityList,
-    // });
-    // console.log(this.state.cityIndex,this.state.cityList);
   };
 
   render() {

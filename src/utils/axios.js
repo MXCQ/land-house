@@ -14,7 +14,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    console.log("开始请求了", config);
+    // console.log("开始请求了", config);
     // 请求拦截器
     Toast.loading("加载中...", 1);
     // 响应拦截器
@@ -32,7 +32,7 @@ instance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    console.log("请求成功了", response);
+    // console.log("请求成功了", response);
     let res = {
       status: response.data.status,
       description: response.data.description,

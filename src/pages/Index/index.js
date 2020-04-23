@@ -4,7 +4,9 @@ import { Carousel, Flex, Grid, SearchBar, WingBlank } from "antd-mobile";
 
 import { BASE_URL } from "../../utils/axios";
 import { getSwiper, getGroup, getNews } from "../../utils/api/home";
-import { getCityInfo } from "../../utils/api/city";
+
+// import { getCityInfo } from "../../utils/api/city";
+import { getCurryCity } from "../../utils/index";
 
 import "./index.scss";
 import Navs from "../../utils/homeNav";
@@ -25,29 +27,36 @@ class Index extends PureComponent {
 
   componentDidMount() {
     this.loadDatas();
-    this.getCurrCity();
+    this.getCityData();
   }
 
   // 获取当前城市信息
-  getCurrCity = () => {
-    let map = new window.BMap.Map("allmap");
-    function myFun(result) {
-      let cityName = result.name;
-      map.setCenter(cityName);
-      console.log("当前定位城市:" + cityName);
+  getCityData = async () => {
+    // let map = new window.BMap.Map("allmap");
+    // function myFun(result) {
+    //   let cityName = result.name;
+    //   map.setCenter(cityName);
+    //   console.log("当前定位城市:" + cityName);
+    // }
+    // // 调用IP定位当前测试的雷LocalCIty（构造函数）
+    // let myCity = new window.BMap.LocalCity();
+    // myCity.get(async (result) => {
+    //   let cityName = result.name;
+    //   console.log(cityName);
+    //   // 调用接口获取城市详细数据
+    //   const res = await getCityInfo(cityName);
+    //   res.status === 200 &&
+    //     this.setState({
+    //       currCity: res.data,
+    //     });
+    // });
+    const res =await getCurryCity();
+    console.log(res);
+    if (res) {
+      this.setState({
+        currCity:  JSON.parse(res),
+      });
     }
-    // 调用IP定位当前测试的雷LocalCIty（构造函数）
-    let myCity = new window.BMap.LocalCity();
-    myCity.get(async (result) => {
-      let cityName = result.name;
-      console.log(cityName);
-      // 调用接口获取城市详细数据
-      const res = await getCityInfo(cityName);
-      res.status === 200 &&
-        this.setState({
-          currCity: res.data,
-        });
-    });
   };
 
   // 获取初始化数据
@@ -58,7 +67,7 @@ class Index extends PureComponent {
       getNews(this.state.currCity.value),
     ];
     let res = await Promise.all(apis);
-    console.log(res);
+    // console.log(res);
     this.setState(
       {
         swiper: res[0].data,
