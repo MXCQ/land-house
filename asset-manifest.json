@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/land-house/static/css/main.9f539194.chunk.css",
+    "main.js": "/land-house/static/js/main.e7a8f5ef.chunk.js",
+    "main.js.map": "/land-house/static/js/main.e7a8f5ef.chunk.js.map",
+    "runtime-main.js": "/land-house/static/js/runtime-main.70d9a814.js",
+    "runtime-main.js.map": "/land-house/static/js/runtime-main.70d9a814.js.map",
+    "static/css/2.11f8621d.chunk.css": "/land-house/static/css/2.11f8621d.chunk.css",
+    "static/js/2.c6baa717.chunk.js": "/land-house/static/js/2.c6baa717.chunk.js",
+    "static/js/2.c6baa717.chunk.js.map": "/land-house/static/js/2.c6baa717.chunk.js.map",
+    "index.html": "/land-house/index.html",
+    "precache-manifest.e4df38b7a8972a3c00a56c77bee78330.js": "/land-house/precache-manifest.e4df38b7a8972a3c00a56c77bee78330.js",
+    "service-worker.js": "/land-house/service-worker.js",
+    "static/css/2.11f8621d.chunk.css.map": "/land-house/static/css/2.11f8621d.chunk.css.map",
+    "static/css/main.9f539194.chunk.css.map": "/land-house/static/css/main.9f539194.chunk.css.map",
+    "static/js/2.c6baa717.chunk.js.LICENSE.txt": "/land-house/static/js/2.c6baa717.chunk.js.LICENSE.txt",
+    "static/media/iconfont.css": "/land-house/static/media/iconfont.f58b610e.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.70d9a814.js",
+    "static/css/2.11f8621d.chunk.css",
+    "static/js/2.c6baa717.chunk.js",
+    "static/css/main.9f539194.chunk.css",
+    "static/js/main.e7a8f5ef.chunk.js"
+  ]
+}
