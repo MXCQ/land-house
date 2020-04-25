@@ -45,7 +45,7 @@ class CityList extends Component {
     this.setState({
       cityIndex,
       cityList,
-    })
+    });
     console.log(cityIndex, cityList);
   };
 
@@ -77,7 +77,7 @@ class CityList extends Component {
   };
 
   // 格式化城市索引字母
-  formatLetter = (letter,first) => {
+  formatLetter = (letter, first) => {
     switch (letter) {
       case "hot":
         return first ? "热" : "热门城市";
@@ -105,7 +105,7 @@ class CityList extends Component {
     style, // Style object to be applied to row (to position it)
   }) => {
     const { cityIndex, cityList } = this.state;
-    
+
     const letter = cityIndex[index];
     return (
       <div key={key} style={style} className="city-item">
@@ -117,6 +117,20 @@ class CityList extends Component {
         ))}
       </div>
     );
+  };
+
+  // 渲染右侧索引
+  renderCityIndex = () => {
+    const { cityIndex } = this.state;
+    return cityIndex.map((item, index) => {
+      return (
+        <li key={item} className="city-index-item">
+          <span className={0 === index ? "index-active" : ""}>
+            {this.formatLetter(item, true)}
+          </span>
+        </li>
+      );
+    });
   };
 
   render() {
@@ -142,6 +156,8 @@ class CityList extends Component {
             />
           )}
         </AutoSizer>
+        {/* 右侧索引 */}
+        <ul className="city-index">{this.renderCityIndex()}</ul>
       </div>
     );
   }
