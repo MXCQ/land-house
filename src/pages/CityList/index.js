@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavBar, Icon } from "antd-mobile";
+import { NavBar, Icon, Toast } from "antd-mobile";
 import { getCities, getHotCities } from "../../utils/api/city";
 import { getCurryCity, setLocal, CURRY_CITY } from "../../utils";
 
@@ -12,10 +12,14 @@ class CityList extends Component {
   state = {
     cityIndex: [],
     cityList: {},
+    // 当前位置的索引,激活索引样式状态
+    activeIndex: 0,
   };
 
   componentDidMount() {
     this.getCityList();
+    // 创建ref
+    this.listRef = React.createRef();
   }
 
   getCityList = async () => {
@@ -96,6 +100,26 @@ class CityList extends Component {
     return 36 + 50 * cityList[letter].length;
   };
 
+  // 滚动列表触发(每次重新渲染列表后都会触发)
+  onRowsRendered = ({ startIndex }) => {
+    console.log(startIndex);
+    this.setState({
+      activeIndex: startIndex,
+    });
+  };
+
+  //
+  changeCity = (item) => {
+    const hasCity = ["北京", "广州", "上海", "深圳"];
+    // console.log(item);
+    if (hasCity.includes(item.label)) {
+      localStorage.setItem(CURRY_CITY, JSON.stringify(item));
+      this.props.history.goBack();
+    } else {
+      Toast.info("无当前城市信息", 1);
+    }
+  };
+
   // 渲染列表项
   rowRenderer = ({
     key, // Unique key within array of rows
@@ -105,13 +129,16 @@ class CityList extends Component {
     style, // Style object to be applied to row (to position it)
   }) => {
     const { cityIndex, cityList } = this.state;
-
     const letter = cityIndex[index];
     return (
       <div key={key} style={style} className="city-item">
         <div className="title">{this.formatLetter(letter)}</div>
         {cityList[letter].map((item) => (
-          <div key={item.value} className="name">
+          <div
+            key={item.value}
+            className="name"
+            onClick={() => this.changeCity(item)}
+          >
             {item.label}
           </div>
         ))}
@@ -121,11 +148,19 @@ class CityList extends Component {
 
   // 渲染右侧索引
   renderCityIndex = () => {
-    const { cityIndex } = this.state;
+    const { cityIndex, activeIndex } = this.state;
     return cityIndex.map((item, index) => {
       return (
-        <li key={item} className="city-index-item">
-          <span className={0 === index ? "index-active" : ""}>
+        <li
+          key={item}
+          className="city-index-item"
+          onClick={() => {
+            console.log(this.listRef);
+            // 调用
+            this.listRef.current.scrollToRow(index);
+          }}
+        >
+          <span className={activeIndex === index ? "index-active" : ""}>
             {this.formatLetter(item, true)}
           </span>
         </li>
@@ -148,7 +183,9 @@ class CityList extends Component {
         <AutoSizer>
           {({ height, width }) => (
             <List
+              ref={this.listRef}
               height={height}
+              onRowsRendered={this.onRowsRendered}
               rowCount={this.state.cityIndex.length}
               rowHeight={this.getRowHeight}
               rowRenderer={this.rowRenderer}
