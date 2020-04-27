@@ -7,7 +7,7 @@ import Filter from './components/Filter'
 import styles from './index.module.css'
 
 
-export default class HouseList extends React.Component {
+export default class House extends React.Component {
   render() {
     return (
       <div className={styles.root}>
