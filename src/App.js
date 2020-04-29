@@ -2,7 +2,9 @@ import React from 'react';
 // 导入antd-mobile组件库
 // import { Button } from 'antd-mobile'
 
-import { BrowserRouter as Router, Link, Route, Redirect, Switch } from 'react-router-dom';
+// import { BrowserRouter as Router, Link, Route, Redirect, Switch } from 'react-router-dom';
+// GitHub部署修改hash
+import { HashRouter as Router, Link, Route, Redirect, Switch } from 'react-router-dom';
 
 import Home from './pages/Home'
 import CityList from './pages/CityList'

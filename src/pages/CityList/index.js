@@ -41,7 +41,7 @@ class CityList extends Component {
 
     // 加入当前城市
     cityIndex.unshift("#");
-    cityList["#"] = [JSON.parse(res2)];
+    cityList["#"] = [res2];
 
     // cityIndex.map((item) => {
     //   console.log(item, cityList[item]);

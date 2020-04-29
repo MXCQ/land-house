@@ -54,7 +54,7 @@ class Index extends PureComponent {
     // console.log(res);
     if (res) {
       this.setState({
-        currCity: JSON.parse(res),
+        currCity: res,
       });
     }
   };
