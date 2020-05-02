@@ -76,25 +76,50 @@ export default class Filter extends Component {
     const newTitleSelectedStatus = {};
     // 遍历selectedValue
     Object.keys(this.selectedValues).forEach((key) => {
-      // 获取当前过滤器选中值 => 数组
       let cur = this.selectedValues[key];
-      // 判断数组的值
       if (key === "area" && (cur[1] !== "null" || cur[0] === "subway")) {
         newTitleSelectedStatus[key] = true;
       } else if (key === "mode" && cur[0] !== "null") {
         newTitleSelectedStatus[key] = true;
       } else if (key === "price" && cur[0] !== "null") {
         newTitleSelectedStatus[key] = true;
-      }
-      // 后续处理
-      else if (key === "more" && cur.length !== 0) {
-        // 更多选择项 FilterMore组件情况
+      } else if (key === "more" && cur.length !== 0) {
+        // 更多选择项 FilterMore 组件情况
         newTitleSelectedStatus[key] = true;
       } else {
         newTitleSelectedStatus[key] = false;
       }
     });
     return newTitleSelectedStatus;
+  };
+
+  // 处理后台需要的筛选条件数据
+  handlerFilters = (selectedValues) => {
+    // 筛选条件数据
+    const { area, mode, price, more } = selectedValues;
+    // 组装数据
+    const filters = {};
+    // area | subway
+    let areaKey = area[0],
+      aval;
+    if (area.length === 2) {
+      aval = area[1];
+    } else {
+      if (area[2] !== "null") {
+        aval = area[2];
+      } else {
+        aval = area[1];
+      }
+    }
+    filters[areaKey] = aval;
+    // mode
+    filters.rentType = mode[0];
+    // price
+    filters.price = price[0];
+    // more
+    filters.more = more.join(",");
+    console.log(filters);
+    return filters;
   };
 
   // 确定选择过滤条件
@@ -106,10 +131,16 @@ export default class Filter extends Component {
     // 处理高亮
     let newSel = this.handlerSel();
     // console.log(newSel);
-    this.setState({
-      openType: "",
-      titleSelectedStatus: newSel,
-    });
+    this.setState(
+      {
+        openType: "",
+        titleSelectedStatus: newSel,
+      },
+      () => {
+        // 处理筛选条件数据
+        this.props.onFilter(this.handlerFilters(this.selectedValues));
+      }
+    );
   };
 
   isShow = () => {
@@ -164,7 +195,7 @@ export default class Filter extends Component {
   renderFilterMore = () => {
     const { openType } = this.state;
     if (openType === "more") {
-      console.log(this.filterData);
+      // console.log(this.filterData);
       // 传递筛选器数据
       const { roomType, oriented, floor, characteristic } = this.filterData;
       const data = { roomType, oriented, floor, characteristic };

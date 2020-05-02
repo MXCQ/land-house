@@ -44,7 +44,7 @@ export const getCurryCity = () => {
       // });
     });
   } else {
-    console.log(curCity);
+    // console.log(curCity);
     
     // 如果有
     return Promise.resolve(curCity);

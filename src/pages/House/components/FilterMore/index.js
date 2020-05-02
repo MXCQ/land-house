@@ -22,7 +22,7 @@ export default class FilterMore extends Component {
       // 有，删除(取消高亮)
       newSelected.splice(index, 1);
     }
-    console.log(newSelected);
+    console.log("选中", newSelected);
     this.setState({
       selected: newSelected,
     });
@@ -54,7 +54,7 @@ export default class FilterMore extends Component {
       onOk,
       onCancel,
     } = this.props;
-    console.log(roomType, oriented, floor, characteristic);
+    // console.log(roomType, oriented, floor, characteristic);
     return (
       <div className={styles.root}>
         {/* 遮罩层 */}
@@ -84,7 +84,9 @@ export default class FilterMore extends Component {
 
         {/* 底部按钮 */}
         <FilterFooter
-          onOk={onOk}
+          onOk={() => {
+            onOk(this.state.selected);
+          }}
           onCancel={onCancel}
           className={styles.footer}
         />

@@ -1,15 +1,22 @@
-import React from 'react';
+import React from "react";
 // 导入antd-mobile组件库
 // import { Button } from 'antd-mobile'
 
 // import { BrowserRouter as Router, Link, Route, Redirect, Switch } from 'react-router-dom';
 // GitHub部署修改hash
-import { HashRouter as Router, Link, Route, Redirect, Switch } from 'react-router-dom';
+import {
+  HashRouter as Router,
+  Link,
+  Route,
+  Redirect,
+  Switch,
+} from "react-router-dom";
 
-import Home from './pages/Home'
-import CityList from './pages/CityList'
-import Map from './pages/Map'
-import Fn404 from './pages/Fn404'
+import HouseDetail from "./components/HouseDetail";
+import Home from "./pages/Home";
+import CityList from "./pages/CityList";
+import Map from "./pages/Map";
+import Fn404 from "./pages/Fn404";
 // 根组件
 function App() {
   return (
@@ -26,6 +33,8 @@ function App() {
           <Route path="/cityList" component={CityList} />
           <Route path="/map" component={Map} />
 
+          {/* 房屋 */}
+          <Route path="/detail/:id" component={HouseDetail} />
           {/* 404页面 */}
           <Route component={Fn404} />
         </Switch>

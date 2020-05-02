@@ -1,6 +1,8 @@
 .root {
   /* padding-top: 45px; */
-  height: calc(100% - 40px);
+  /* height: 100%; */
+  /* height: calc(100% - 40px); */
+  height: 1000px;
 }
 
 /* 顶部导航栏样式 */
