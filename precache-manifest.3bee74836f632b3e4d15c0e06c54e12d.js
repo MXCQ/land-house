@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8f1729b66931c29323be1420ae1394ee",
+    "revision": "067f019980b39838a28f4c07a8d42475",
     "url": "/land-house/index.html"
   },
   {
-    "revision": "1630d24f333fe512da73",
+    "revision": "a84b31c780f2cbb193d8",
     "url": "/land-house/static/css/2.1debc3bb.chunk.css"
   },
   {
-    "revision": "07c0f5e6a1a3d4806aa6",
+    "revision": "1e9379ba623f0b55bc96",
     "url": "/land-house/static/css/main.3cde5f1a.chunk.css"
   },
   {
-    "revision": "1630d24f333fe512da73",
-    "url": "/land-house/static/js/2.7e6e1660.chunk.js"
+    "revision": "a84b31c780f2cbb193d8",
+    "url": "/land-house/static/js/2.39c26481.chunk.js"
   },
   {
     "revision": "4d47ffde3dc69784e8e23fd910817ef8",
-    "url": "/land-house/static/js/2.7e6e1660.chunk.js.LICENSE.txt"
+    "url": "/land-house/static/js/2.39c26481.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "07c0f5e6a1a3d4806aa6",
-    "url": "/land-house/static/js/main.94dfcb54.chunk.js"
+    "revision": "1e9379ba623f0b55bc96",
+    "url": "/land-house/static/js/main.461c1830.chunk.js"
   },
   {
     "revision": "b99247911ea907e74091",
