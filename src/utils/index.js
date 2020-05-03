@@ -45,8 +45,20 @@ export const getCurryCity = () => {
     });
   } else {
     // console.log(curCity);
-    
+
     // 如果有
     return Promise.resolve(curCity);
   }
 };
+
+const TOKEN = "zf_token";
+// 获取
+const getToken = () => localStorage.getItem(TOKEN);
+// 设置
+const setToken = (val) => localStorage.setItem(TOKEN, val);
+// 删除
+const removeToken = () => localStorage.removeItem(TOKEN);
+// 是否登录判断：boolean
+const isAuth = () => !!getToken();
+// 导出
+export { getToken, setToken, removeToken, isAuth };

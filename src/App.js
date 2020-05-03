@@ -15,8 +15,14 @@ import {
 import HouseDetail from "./components/HouseDetail";
 import Home from "./pages/Home";
 import CityList from "./pages/CityList";
+import Login from "./pages/Login";
 import Map from "./pages/Map";
 import Fn404 from "./pages/Fn404";
+
+import Rent from "./pages/Rent";
+import RentAdd from "./pages/Rent/Add";
+import RentSearch from "./pages/Rent/Search";
+
 // 根组件
 function App() {
   return (
@@ -32,9 +38,18 @@ function App() {
           <Route path="/home" component={Home} />
           <Route path="/cityList" component={CityList} />
           <Route path="/map" component={Map} />
+          <Route path="/login" component={Login} />
 
           {/* 房屋 */}
           <Route path="/detail/:id" component={HouseDetail} />
+
+          {/* 房源管理 */}
+          <Route path="/rent" exact component={Rent} />
+          <Route path="/rent/add" component={RentAdd} />
+          <Route path="/rent/search" component={RentSearch} />
+          {/* <AuthRoute path="/rent" exact component={Rent} />
+            <AuthRoute path="/rent/add" component={RentAdd} />
+            <AuthRoute path="/rent/search" component={RentSearch} /> */}
           {/* 404页面 */}
           <Route component={Fn404} />
         </Switch>

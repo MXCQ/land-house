@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Toast } from "antd-mobile";
+import { getToken } from "./index";
 
 // 后台接口的基础地址
 const BASE_URL = "https://api-haoke-web.itheima.net";
@@ -12,8 +13,16 @@ const instance = axios.create({
 
 // Add a request interceptor
 instance.interceptors.request.use(
+  // 根据条件统一设置=》请求头headers=>token
   function (config) {
-    // Do something before request is sent
+    const { url, headers } = config;
+    if (
+      url.startsWith("/user") &&
+      url !== "/user/registered" &&
+      url !== "/user/login"
+    ) {
+      headers.authorization = getToken();
+    }
     // console.log("开始请求了", config);
     // 请求拦截器
     Toast.loading("加载中...", 1);

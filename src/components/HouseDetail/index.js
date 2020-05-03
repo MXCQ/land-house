@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Carousel, Flex, Modal, Toast, NavBar, Icon } from "antd-mobile";
-import axios from "axios";
 import HouseItem from "../HouseItem";
 import styles from "./index.module.css";
 import HousePackage from "../HousePackage";
@@ -11,6 +10,7 @@ import {
   addFav,
   delFav,
 } from "../../utils/api/house";
+import { isAuth } from "../../utils";
 // 猜你喜欢
 const recommendHouses = [
   {
@@ -213,6 +213,55 @@ export default class HouseDetail extends Component {
     });
   }
 
+  // 检查房子是否收藏过
+  checkHouseFav = async () => {
+    if (!isAuth) return;
+    const { id } = this.props.match.params;
+    let res = await getHouseFav(id);
+    console.log(res);
+    if (res.status === 200) {
+      this.setState({
+        isFavorite: res.data.isFavorite,
+      });
+    } else {
+      // 如果token过期，提示用户是否重新登录
+    }
+  };
+
+  // 处理收藏
+  handleFavorite = async () => {
+    const { history, match, location } = this.props;
+    if (!isAuth()) {
+      alert("提示", "登录后才能收藏房源，是否登录？", [
+        { text: "取消" },
+        {
+          text: "去登录",
+          onPress: async () => {
+            history.push("/login", { backUrl: location.pathname });
+          },
+        },
+      ]);
+    } else {
+      const { isFavorite } = this.state;
+      const { id } = match.params;
+      if (isFavorite) {
+        // 删除收藏
+        const res = await delFav(id);
+        res.status === 200 &&
+          this.setState({
+            isFavorite: false,
+          });
+      } else {
+        // 添加收藏
+        const res = await addFav(id);
+        res.status === 200 &&
+          this.setState({
+            isFavorite: true,
+          });
+      }
+    }
+  };
+
   render() {
     const {
       isLoading,
@@ -359,7 +408,7 @@ export default class HouseDetail extends Component {
                 BASE_URL + (isFavorite ? "/img/star.png" : "/img/unstar.png")
               }
               className={styles.favoriteImg}
-              alt="收藏"
+              alt=""
             />
             <span className={styles.favorite}>
               {isFavorite ? "已收藏" : "收藏"}
